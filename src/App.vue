@@ -9,12 +9,11 @@ import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
-  created() {
-    const currentRoute = this.$router.history.current.name;
-    console.log('cr', currentRoute, currentRoute === 'Activate');
+  updated() {
+    const currentRoute = this.$route.name;
 
-    if (currentRoute !== 'Activate') {
-      // this.tryToLoginAndGetUserData();
+    if (currentRoute !== 'Activate' && currentRoute !== 'Register') {
+      this.tryToLoginAndGetUserData();
     }
   },
   methods: {

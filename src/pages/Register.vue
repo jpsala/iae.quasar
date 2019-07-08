@@ -1,5 +1,6 @@
 <template>
   <div class="q-pa-md row q-guttter-md q-gutter-y-md justify-center">
+    <my-spinner  v-if="loading" />
     <div class="doc-note doc-note--tip">
         Ingrese la dirección de correo que está registrada en el IAE y el sistema le enviará
         un correo con un link para activar su cuenta.
@@ -15,7 +16,7 @@
                   lazy-rules :rules="[ val => val && val.length > 0 || 'Ingrese su correo']" />
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn label="Rigistro" type="submit" color="primary" />
+          <q-btn label="Registro" type="submit" color="primary" />
         </q-card-actions>
       </q-form>
     </q-card>
@@ -23,12 +24,15 @@
 </template>
 <script>
 import { mapActions } from 'vuex';
+import mySpinner from 'app/src/components/MySpinner';
 
 export default {
+  components: { mySpinner },
   data() {
     return {
+      loading: false,
       user: {
-        email: 'oteizapaz@hotmail.com',
+        email: 'jpsala@gmail.com',
         saveCredentials: 'false',
       },
     };
@@ -39,10 +43,28 @@ export default {
     onSubmit() {
       // commit('addLoadingIndicator', 'main', { root: true });
       // { method: 'POST', body: JSON.stringify({ socio_id: state.hijoActivo.id }) }
+      this.loading = true;
       this.$axios
         .post('register', this.user)
-        .then(response => response)
+        .then((response) => {
+          this.loading = false;
+          const { status } = response.data;
+          if (status === 200) {
+            this.$q.notify({
+              color: 'primary',
+              textColor: 'white',
+              icon: 'fas fa-check-circle',
+              message: 'Recibirá un correo con un link de activación',
+            });
+            setTimeout(() => {
+              this.$router.push('/login');
+            }, 5000);
+          }
+          console.log(status);
+        })
         .catch((e) => {
+          this.loading = false;
+
           throw e;
         });
     },

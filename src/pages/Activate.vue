@@ -48,10 +48,10 @@ export default {
               icon: 'fas fa-check-circle',
               message: 'Su cuenta fué activada, redireccionando a la pantalla de ingreso',
             });
+            setTimeout(() => {
+              this.$router.push('/login');
+            }, 5000);
           }
-          setTimeout(() => {
-            this.$router.push('/login');
-          }, 5000);
         })
         .catch((error) => {
           console.error('e', error);

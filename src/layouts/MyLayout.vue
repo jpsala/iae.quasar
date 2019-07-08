@@ -9,8 +9,9 @@
           </q-avatar>
           <div class="col"></div>
         </q-toolbar-title>
-        <q-btn v-if="!loggedIn" @click="login()" flat>Ingresar</q-btn>
-        <q-btn v-if="!loggedIn" @click="register()" flat>Registrarse</q-btn>
+        <q-btn v-if="!loggedIn && $route.path !== '/login'" @click="login()" flat>Ingresar</q-btn>
+        <q-btn v-if="!loggedIn && $route.path !== '/register'" @click="register()"
+            flat>Registrarse</q-btn>
         <q-btn v-if="loggedIn" @click="logout()" flat>Salir</q-btn>
       </q-toolbar>
     </q-header>

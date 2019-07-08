@@ -3,7 +3,7 @@ import Vue from 'vue';
 export function login(context, user) {
   return Vue.prototype.$axios.post('login', user)
     .then((response) => {
-      if (response.data.status !== 200) return undefined;
+      if (response.data.status !== 200) return response.data;
       const { userData } = response.data;
       userData.hijos = response.data.hijos;
       context.dispatch('setLoginData', userData);

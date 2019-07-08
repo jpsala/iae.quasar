@@ -10,7 +10,8 @@
           <q-input filled v-model="user.email" label="Dirección de correo *" lazy-rules
           :rules="[ val => val && val.length > 0 || 'Ingrese su correo']" />
 
-          <q-input filled v-model="user.password" label="Contraseña *" lazy-rules :rules="[
+          <q-input filled type="password" v-model="user.password" label="Contraseña *"
+                  lazy-rules :rules="[
           val => val !== null && val !== '' || 'Ingrese su contraseña',
         ]" />
 
@@ -31,7 +32,7 @@ export default {
   data() {
     return {
       user: {
-        email: 'oteizapaz@hotmail.com',
+        email: 'jpsala@gmail.com',
         password: 'masterPassword',
         saveCredentials: 'false',
       },
@@ -42,6 +43,8 @@ export default {
     ...mapActions('session', ['login', 'logout']),
     onSubmit() {
       this.login(this.user).then((data) => {
+        console.log('data', data);
+
         if (data.status !== 200) {
           this.$q.notify({
             color: 'red-4',
