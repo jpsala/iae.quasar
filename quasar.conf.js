@@ -66,18 +66,20 @@ module.exports = function (ctx) {
         // 'QTooltip',
         'QSpinnerPuff',
         // 'QInnerLoading',
+        'QAjaxBar',
       ],
 
       directives: [
-        'Ripple',
-        'GoBack',
+        // 'Ripple',
+        // 'GoBack',
       ],
 
       // Quasar plugins
       plugins: [
         'Notify',
-        'LocalStorage',
-        'Dialog',
+        // 'LocalStorage',
+        // 'Loading',
+        // 'Dialog',
       ],
     },
 

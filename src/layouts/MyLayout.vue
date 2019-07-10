@@ -137,6 +137,7 @@ export default {
             {
               label: 'Talleres',
               icon: 'party_mode',
+              to: '/talleres',
             },
           ],
         },

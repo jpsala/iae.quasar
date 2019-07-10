@@ -1,5 +1,6 @@
 <template>
   <div id="q-app">
+    <q-ajax-bar position="top" />
     <router-view />
   </div>
 </template>
@@ -9,12 +10,15 @@ import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
-  updated() {
-    const currentRoute = this.$route.name;
-
-    if (currentRoute !== 'Activate' && currentRoute !== 'Register') {
-      this.tryToLoginAndGetUserData();
-    }
+  created() {
+    this.$router.beforeResolve((to, from, next) => {
+      const loggedIn = this.$store.getters['session/loggedIn'];
+      const unprotectedRoute = to.meta.free;
+      if (!(loggedIn || unprotectedRoute)) {
+        this.tryToLoginAndGetUserData();
+      }
+      next();
+    });
   },
   methods: {
     ...mapActions('session', ['login', 'logout']),

@@ -2,7 +2,7 @@
   <div>
     <template v-for="(item, index) in items">
       <template v-if="protectedItem(item)">
-        <q-item v-if="!item.items" :key="index" exact :inset-level="item.level" :to="item.to"
+        <q-item v-if="!item.items" :key="index" :inset-level="item.level" :to="item.to"
                 @click.native="exec(item)" style="cursor: pointer">
           <q-item-section avatar>
             <q-icon :name="item.icon" />
