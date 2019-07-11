@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import session from './session';
+import session from './sessionModule';
+import alumno from './alumnoModule';
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       session,
+      alumno,
     },
 
     // enable strict mode (adds overhead!)

@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import store from '../store';
 
 export default async ({ Vue, store }) => {
   // axios.defaults.baseURL = 'http://iae.dyndns.org/iae/index.php?r=apiApp/';

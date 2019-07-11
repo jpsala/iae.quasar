@@ -17,7 +17,8 @@
     </q-header>
     <q-drawer :breakpoint="900" v-model="left" side="left" bordered>
       <q-list class="rounded-borders">
-        <my-drawer-content :left.sync="left" :items='items' />
+        <my-drawer-hijos />
+        <my-drawer-content :items='items' />
         <q-item v-if="this.$store.getters['session/loggedIn']" exact @click.native="logout()"
                 style="cursor: pointer">
           <q-item-section avatar>
@@ -47,6 +48,7 @@
 
 <script>
 import myDrawerContent from 'app/src/components/MyDrawerContent';
+import myDrawerHijos from 'app/src/components/MyDrawerHijos';
 import { mapGetters } from 'vuex';
 
 function setItemsDefaults(items, level = 0) {
@@ -64,7 +66,7 @@ function setItemsDefaults(items, level = 0) {
   return items;
 }
 export default {
-  components: { myDrawerContent },
+  components: { myDrawerContent, myDrawerHijos },
   data() {
     return {
       left: true,
@@ -150,6 +152,7 @@ export default {
             {
               label: 'Estado de Cuenta',
               icon: 'print',
+              to: 'estadoDeCuenta',
             },
           ],
         },

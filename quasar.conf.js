@@ -70,7 +70,7 @@ module.exports = function (ctx) {
       ],
 
       directives: [
-        // 'Ripple',
+        'Ripple',
         // 'GoBack',
       ],
 

@@ -8,6 +8,7 @@ const routes = [
       { path: '/login', component: () => import('pages/Login.vue'), meta: { free: true } },
       { path: '/notas', component: () => import('pages/Notas.vue') },
       { path: '/talleres', component: () => import('pages/Talleres.vue') },
+      { path: '/estadoDeCuenta', component: () => import('pages/EstadoDeCuenta.vue') },
       {
         path: '/register', meta: { free: true }, component: () => import('pages/Register.vue'), name: 'Register',
       },

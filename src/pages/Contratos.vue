@@ -9,7 +9,6 @@
 
 /* eslint-disable no-unreachable */
 <script>
-import { mapState } from 'vuex';
 import mySpinner from 'app/src/components/MySpinner';
 // import { Loading } from 'quasar';
 
@@ -21,10 +20,6 @@ export default {
       src: '',
       loading: false,
     };
-  },
-  computed: {
-    ...mapState('socios', ['hijos']),
-    ...mapState('auth', ['currentUser']),
   },
   async mounted() {
     setTimeout(() => {
