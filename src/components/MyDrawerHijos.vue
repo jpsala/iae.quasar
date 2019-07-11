@@ -2,16 +2,17 @@
 <q-list bordered separator>
   <q-expansion-item v-if="loggedIn" ref="itemHijos" group="0" :default-opened="true">
     <template v-slot:header>
+      <q-item-section>
+        <!-- <q-item-label header>Alumno Activo:</q-item-label> -->
+        <q-item-label lines="1">{{hijoActivo.nombre}}</q-item-label>
+        <q-item-label caption>Haga click aquí para seleccionar el alumno activo</q-item-label>
+      </q-item-section>
       <q-item-section avatar>
-            <q-avatar size="35px">
-              <img :src="'https://assets.iae.com.ar/fotos/thumbnails/'+hijoActivo.matricula.trim()+'.gif'"
-              @error="imageNotFound($event.target)">
-            </q-avatar>
-          </q-item-section>
-        <q-item-section>
-          <q-item-label lines="1">{{hijoActivo.nombre}}</q-item-label>
-          <q-item-label caption>Haga click aquí para seleccionar el alumno activo</q-item-label>
-        </q-item-section>
+        <q-avatar size="60px">
+          <img :src="'https://assets.iae.com.ar/fotos/thumbnails/'+hijoActivo.matricula.trim()+'.gif'"
+          @error="imageNotFound($event.target)">
+        </q-avatar>
+      </q-item-section>
 
     </template>
     <template v-for="(hijo, index) in hijos">
@@ -19,7 +20,7 @@
               :inset-level="0.2" @click="setHijoActivo(hijo) ; $refs.itemHijos.hide()"
               :key="index">
           <q-item-section avatar>
-            <q-avatar size="35px">
+            <q-avatar size="45px">
               <img :src="'https://assets.iae.com.ar/fotos/thumbnails/'+hijo.matricula.trim()+'.gif'"
               @error="imageNotFound($event.target)">
             </q-avatar>
