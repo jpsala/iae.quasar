@@ -5,7 +5,8 @@ export default async ({ Vue, store }) => {
   axios.defaults.baseURL = 'http://localhost/iae/index.php?r=apiApp/';
 
   axios.interceptors.response.use((response) => {
-    console.log('axios.interceptors.response', response);
+    const url = response.config.url.substring(response.config.url.lastIndexOf('/') + 1);
+    console.log('endpoint %O %O\nresponse.data %O', url, response, response.data);
     store.dispatch('session/updateApiTokenFromInterceptor', response.data.access_token);
     return response;
   }, (error) => {

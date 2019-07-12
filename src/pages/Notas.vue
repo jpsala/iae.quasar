@@ -1,25 +1,43 @@
 <template>
   <q-page padding v-if="loggedIn">
-    <p class="text-faded q-pa-sm" v-for="i in 10" :key="i">
-      NOTAS DE {{hijoActivo.nombre}}
-      {{i}} Lorem ipsum dolor sit amet.
-    </p>
+    <component
+      v-if="notas"
+      :is="hijoActivo.Nivel_id === '1' ? 'Inicial': 'EpEs'"
+      :notas="notas"/>
   </q-page>
 </template>
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
+import EpEs from './notasSegunNivel/EsEp';
+import Inicial from './notasSegunNivel/Inicial';
 
 export default {
+  components: { EpEs, Inicial },
+  data() {
+    return {
+      notas: [],
+    };
+  },
   computed: {
     ...mapGetters('session', ['loggedIn']),
-    ...mapState({ hijos: state => (state.session.user ? state.session.user.hijos : []) }),
-    ...mapState({ hijoActivo: state => state.session.user.hijoActivo }),
+    ...mapState({ hijos: state => (this.loggedIn ? state.session.user.hijos : []) }),
+    ...mapState({
+      hijoActivo(state) {
+        this.notas = undefined;
+        return this.loggedIn ? state.session.user.hijoActivo : undefined;
+      },
+    }),
   },
   methods: {
-    ...mapActions('session', ['loadEstadoDeCuenta']),
+    ...mapActions('alumno', ['getNotas']),
+  },
+  watch: {
+    async hijoActivo() {
+      this.notas = await this.getNotas();
+    },
   },
   async mounted() {
-    console.log('loadEstadoDeCuenta', await this.loadEstadoDeCuenta());
+    this.notas = await this.getNotas();
   },
 };
 </script>

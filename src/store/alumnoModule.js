@@ -9,6 +9,13 @@ const getters = {
 };
 
 const actions = {
+  getNotas({
+    rootState, rootGetters,
+  }) {
+    if (!rootGetters['session/loggedIn']) return false;
+    const hijo = rootState.session.user.hijoActivo;
+    return Vue.prototype.$axios.get(`notas&socio_id=${hijo.id}`);
+  },
   loadEstadoDeCuenta({ rootState }, alumnoId) {
     if (!rootState.session.user) return false;
     if (!alumnoId) alumnoId = rootState.session.user.hijoActivo.id;

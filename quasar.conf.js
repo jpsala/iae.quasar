@@ -67,6 +67,10 @@ module.exports = function (ctx) {
         'QSpinnerPuff',
         // 'QInnerLoading',
         'QAjaxBar',
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd',
       ],
 
       directives: [
