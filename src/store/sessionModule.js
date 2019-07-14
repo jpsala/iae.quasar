@@ -18,11 +18,11 @@ const actions = {
   login(context, user) {
     return Vue.prototype.$axios.post('login', user)
       .then((response) => {
-        if (response.data.status !== 200) return response.data;
-        const { userData } = response.data;
-        userData.hijos = response.data.hijos;
+        if (response.status !== 200) return response.data;
+        const { userData } = response;
+        userData.hijos = response.hijos;
         context.dispatch('setLoginData', userData);
-        return response.data;
+        return response;
       })
       .catch((error) => {
         console.error('e', error);
@@ -38,7 +38,7 @@ const actions = {
   },
   setLoginData({ commit, dispatch }, data) {
     commit('USER', data);
-    dispatch('setHijoActivo', data ? data.hijos[0] : undefined);
+    dispatch('setHijoActivo', data ? data.hijos[2] : undefined);
   },
   updateApiTokenFromInterceptor({ dispatch }, value) {
     dispatch('setApiToken', value);

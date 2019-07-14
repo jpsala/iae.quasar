@@ -1,14 +1,17 @@
 import axios from 'axios';
 
+const local = document.location.hostname === 'localhost';
 export default async ({ Vue, store }) => {
   // axios.defaults.baseURL = 'http://iae.dyndns.org/iae/index.php?r=apiApp/';
-  axios.defaults.baseURL = 'http://localhost/iae/index.php?r=apiApp/';
+  axios.defaults.baseURL = local ? 'http://localhost/iae/index.php?r=apiApp/' : 'https://root.iae.com.ar/iae/index.php?r=apiApp/';
 
   axios.interceptors.response.use((response) => {
-    const url = response.config.url.substring(response.config.url.lastIndexOf('/') + 1);
-    console.log('endpoint %O %O\nresponse.data %O', url, response, response.data);
-    store.dispatch('session/updateApiTokenFromInterceptor', response.data.access_token);
-    return response;
+    const endPoint = response.config.url.substring(response.config.url.lastIndexOf('/') + 1);
+    console.log('endpoint %O %O\nresponse.data %O', endPoint, response, response.data);
+    if (response.data && response.data.access_token && response.data.access_token !== 'undefined') {
+      store.dispatch('session/updateApiTokenFromInterceptor', response.data.access_token);
+    }
+    return response.data;
   }, (error) => {
     Promise.reject(error);
   });

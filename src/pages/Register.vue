@@ -1,11 +1,10 @@
 <template>
   <div class="q-pa-md row q-guttter-md q-gutter-y-md justify-center">
-    <my-spinner  v-if="loading" />
     <div class="doc-note doc-note--tip">
         Ingrese la dirección de correo que está registrada en el IAE y el sistema le enviará
         un correo con un link para activar su cuenta.
     </div>
-    <q-card class="my-card">
+    <q-card class="my-card relative-position">
       <q-card-section>
         <div class="text-h6">Se está registrando en el IAE</div>
       </q-card-section>
@@ -19,21 +18,21 @@
           <q-btn label="Registro" type="submit" color="primary" />
         </q-card-actions>
       </q-form>
+      <q-inner-loading :showing="loading" />
     </q-card>
   </div>
 </template>
 <script>
 import { mapActions } from 'vuex';
-import mySpinner from 'app/src/components/MySpinner';
 
 export default {
-  components: { mySpinner },
   data() {
     return {
       loading: false,
       user: {
         email: 'jpsala@gmail.com',
         saveCredentials: 'false',
+        version: '2',
       },
     };
   },
@@ -48,7 +47,7 @@ export default {
         .post('register', this.user)
         .then((response) => {
           this.loading = false;
-          const { status } = response.data;
+          const { status } = response;
           if (status === 200) {
             this.$q.notify({
               color: 'primary',

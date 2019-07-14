@@ -65,12 +65,13 @@ module.exports = function (ctx) {
         'QBanner',
         // 'QTooltip',
         'QSpinnerPuff',
-        // 'QInnerLoading',
+        'QInnerLoading',
         'QAjaxBar',
         'QTable',
         'QTh',
         'QTr',
         'QTd',
+        'QSelect',
       ],
 
       directives: [
@@ -164,7 +165,7 @@ module.exports = function (ctx) {
     },
 
     cordova: {
-      // id: 'org.cordova.quasar.app',
+      id: 'org.cordova.quasar.iae',
       // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
     },
 

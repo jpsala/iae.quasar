@@ -14,13 +14,12 @@ const actions = {
   }) {
     if (!rootGetters['session/loggedIn']) return false;
     const hijo = rootState.session.user.hijoActivo;
-    return Vue.prototype.$axios.get(`notas&socio_id=${hijo.id}`);
+    return Vue.prototype.$axios.get(`notasV2&socio_id=${hijo.id}`);
   },
   loadEstadoDeCuenta({ rootState }, alumnoId) {
     if (!rootState.session.user) return false;
     if (!alumnoId) alumnoId = rootState.session.user.hijoActivo.id;
-    return Vue.prototype.$axios.get(`emisionComprobantes_ajax&socio_id=${alumnoId}`)
-      .then(response => response.data);
+    return Vue.prototype.$axios.get(`emisionComprobantes_ajax&socio_id=${alumnoId}`);
   },
 };
 

@@ -1,19 +1,17 @@
 <template>
   <q-page padding class="relative-position">
-    <my-spinner  v-if="loading" />
     <q-img v-if="src" :src="src" @load="imgLoaded">
       <template v-slot:loading />
     </q-img>
+    <q-inner-loading :showing="loading" />
   </q-page>
 </template>
 
 /* eslint-disable no-unreachable */
 <script>
-import mySpinner from 'app/src/components/MySpinner';
 // import { Loading } from 'quasar';
 
 export default {
-  components: { mySpinner },
   data() {
     return {
       tipo: '',

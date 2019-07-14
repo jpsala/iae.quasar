@@ -1,9 +1,9 @@
 <template>
-  <q-page padding v-if="loggedIn">
+  <q-page padding style="max-width: 800px; margin: auto" v-if="loggedIn">
     <component
       v-if="notas"
       :is="hijoActivo.Nivel_id === '1' ? 'Inicial': 'EpEs'"
-      :notas="notas"/>
+      :notas="notas" :hijoActivo="hijoActivo"/>
   </q-page>
 </template>
 <script>
@@ -15,7 +15,7 @@ export default {
   components: { EpEs, Inicial },
   data() {
     return {
-      notas: [],
+      notas: undefined,
     };
   },
   computed: {
@@ -23,7 +23,6 @@ export default {
     ...mapState({ hijos: state => (this.loggedIn ? state.session.user.hijos : []) }),
     ...mapState({
       hijoActivo(state) {
-        this.notas = undefined;
         return this.loggedIn ? state.session.user.hijoActivo : undefined;
       },
     }),

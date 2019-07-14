@@ -15,9 +15,9 @@
         <q-btn v-if="loggedIn" @click="logout()" flat>Salir</q-btn>
       </q-toolbar>
     </q-header>
-    <q-drawer :breakpoint="900" v-model="left" side="left" bordered>
+    <q-drawer ref="drawer" :breakpoint="900" v-model="left" side="left" bordered>
       <q-list class="rounded-borders">
-        <my-drawer-hijos />
+        <my-drawer-hijos :drawer="$refs.drawer"/>
         <my-drawer-content :items='items' />
         <q-item v-if="this.$store.getters['session/loggedIn']" exact @click.native="logout()"
                 style="cursor: pointer">
@@ -29,19 +29,18 @@
       </q-list>
     </q-drawer>
     <q-page-container>
+      <!-- <span style="font-size:6px;float:right">{{$q.screen.width}}</span> -->
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
+    <!-- <q-footer elevated class="bg-grey-8 text-white">
       <q-toolbar>
         <q-toolbar-title>
-          <!-- <q-avatar style="width: 55px">
-            <img src="../assets/logo_blue.png">
-          </q-avatar> -->
+          IAE
         </q-toolbar-title>
         jpsala@iae.com.ar
       </q-toolbar>
-    </q-footer>
+    </q-footer> -->
 
   </q-layout>
 </template>
@@ -152,7 +151,7 @@ export default {
             {
               label: 'Estado de Cuenta',
               icon: 'print',
-              to: 'estadoDeCuenta',
+              to: '/estadoDeCuenta',
             },
           ],
         },

@@ -17,7 +17,8 @@
     </template>
     <template v-for="(hijo, index) in hijos">
       <q-item v-if="hijo !== hijoActivo" clickable v-ripple
-              :inset-level="0.2" @click="setHijoActivo(hijo) ; $refs.itemHijos.hide()"
+              :inset-level="0.2"
+              @click="itemClick(hijo)"
               :key="index">
           <q-item-section avatar>
             <q-avatar size="45px">
@@ -35,6 +36,12 @@
 import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
+  props: {
+    drawer: {
+      type: Object,
+      default: undefined,
+    },
+  },
   data() {
     return {
     };
@@ -47,6 +54,11 @@ export default {
     ...mapState({ hijoActivo: state => state.session.user.hijoActivo }),
   },
   methods: {
+    itemClick(hijo) {
+      this.setHijoActivo(hijo);
+      this.$refs.itemHijos.hide();
+      if (this.$q.screen.width < 915) { this.drawer.hide(); }
+    },
     ...mapActions('session', ['setHijoActivo']),
     imageNotFound(t) {
       t.src = 'https://assets.iae.com.ar/fotos/thumbnails/0000.gif';

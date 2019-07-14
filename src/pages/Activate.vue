@@ -7,11 +7,11 @@
       <q-separator inset />
       <q-form @submit="onSubmit" class="q-gutter-md">
         <q-card-section>
-          <q-input filled v-model="user.password" label="Contraseña *"
+          <q-input filled v-model="user.password" type="password" label="Contraseña *"
                   lazy-rules :rules="[
           val => val !== null && val !== '' || 'Ingrese su contraseña',
         ]" />
-          <q-input filled v-model="user.password2" label="Repita su Contraseña *"
+          <q-input filled v-model="user.password2" type="password" label="Repita su Contraseña *"
                   lazy-rules :rules="[
           val => val !== null && val !== '' || 'Repita su contraseña',
         ]" />
@@ -32,8 +32,8 @@ export default {
     return {
       user: {
         id: undefined,
-        password: '1234',
-        password2: '1234',
+        password: '',
+        password2: '',
       },
     };
   },
@@ -41,7 +41,7 @@ export default {
     onSubmit() {
       this.$axios.post('activate', { socio_id: this.user.id, password: this.user.password })
         .then((response) => {
-          if (response.data.status === 200) {
+          if (response.status === 200) {
             this.$q.notify({
               color: 'primary',
               textColor: 'white',
