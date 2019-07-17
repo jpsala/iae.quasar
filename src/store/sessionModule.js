@@ -29,9 +29,16 @@ const actions = {
       });
   },
   logout({ commit, dispatch }) {
-    commit('API_TOKEN', undefined);
-    dispatch('setLoginData', undefined);
-    dispatch('setHijoActivo', undefined);
+    if (navigator.app) {
+      navigator.app.exitApp();
+    } else if (navigator.device) {
+      navigator.device.exitApp();
+    } else {
+      commit('API_TOKEN', undefined);
+      dispatch('setLoginData', undefined);
+      dispatch('setHijoActivo', undefined);
+      window.close();
+    }
   },
   setApiToken({ commit }, value) {
     commit('API_TOKEN', value);

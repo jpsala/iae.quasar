@@ -9,12 +9,15 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0",
-    "deploy": "npx quasar build && ./deploy.sh"
+    "deploy": "npx quasar build && ./deploy.sh",
+    "pixel": "npx quasar dev -m cordova -T android -e Pixel_2_XL_API_27",
+    "nexus": "npx quasar dev -m cordova -T android -e Nexus_5_API_24"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
-    "quasar": "^1.0.0"
+    "quasar": "^1.0.0",
+    "vue-zoomer": "^0.3.1"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",
